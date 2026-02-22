@@ -1,0 +1,36 @@
+# Core ML / Audio
+torch>=2.1.0
+torchaudio>=2.1.0
+transformers>=4.38.0
+librosa>=0.10.1
+soundfile>=0.12.1
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Forced Alignment
+montreal-forced-aligner>=3.0.0  # CLI tool; install separately via conda
+# Alternative lightweight aligner (pure Python):
+phonemizer>=3.2.1
+epitran>=1.24
+
+# API Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.6.0
+python-multipart>=0.0.9
+
+# Datasets
+datasets>=2.18.0          # HuggingFace datasets (LibriSpeech, TIMIT)
+tqdm>=4.66.0
+
+# Evaluation & comparison
+azure-cognitiveservices-speech>=1.37.0  # Azure SDK for benchmarking only
+python-dotenv>=1.0.1
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.2
+scikit-learn>=1.4.0
+
+# Dev / test
+pytest>=8.1.0
+httpx>=0.27.0             # async test client for FastAPI

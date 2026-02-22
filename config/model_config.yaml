@@ -1,0 +1,24 @@
+model:
+  # Primary model: wav2vec2 for phoneme posterior extraction
+  backbone: "facebook/wav2vec2-base"          # ~95 MB; swap to wav2vec2-large for higher accuracy
+  device: "cpu"                                # "cuda" if GPU available
+  sample_rate: 16000
+
+  # GOP scorer settings
+  gop:
+    # GOP score = mean log-posterior of correct phoneme over aligned frames
+    # Scores are mapped to [0, 100] via sigmoid-based calibration
+    calibration_alpha: 6.0       # controls sigmoid steepness
+    calibration_beta: -0.5       # shifts midpoint
+    min_frames_per_phoneme: 2    # ignore very short segments
+
+  # Fine-tuning (if training a custom head on top of wav2vec2)
+  finetune:
+    freeze_feature_extractor: true
+    learning_rate: 1.0e-4
+    batch_size: 16
+    epochs: 20
+    warmup_steps: 500
+    output_dir: "checkpoints/"
+
+phoneme_set: "ipa"   # "ipa" or "arpabet"

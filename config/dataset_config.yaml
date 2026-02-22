@@ -1,0 +1,49 @@
+datasets:
+  timit:
+    hf_name: "timit_asr"               # HuggingFace datasets identifier
+    local_path: "data/raw/timit"
+    splits: ["train", "test"]
+    phoneme_column: "phonetic_detail"
+    audio_column: "audio"
+    sample_rate: 16000
+    notes: "Best for phoneme-level supervision. Requires LDC license for full dataset."
+
+  librispeech:
+    hf_name: "librispeech_asr"
+    local_path: "data/raw/librispeech"
+    splits:
+      - "train.clean.100"
+      - "train.clean.360"
+      - "validation.clean"
+      - "test.clean"
+    audio_column: "audio"
+    transcript_column: "text"
+    sample_rate: 16000
+    notes: "Large-scale clean English. No phoneme labels; use forced aligner."
+
+  vctk:
+    hf_name: "vctk"
+    local_path: "data/raw/vctk"
+    splits: ["train"]
+    audio_column: "audio"
+    transcript_column: "text"
+    speaker_column: "speaker_id"
+    sample_rate: 16000
+    notes: "110 speakers, diverse British/American accents. Good for accent robustness."
+
+  # Additional datasets to explore
+  common_voice:
+    hf_name: "mozilla-foundation/common_voice_16_1"
+    language: "en"
+    notes: "Large crowd-sourced; useful for accent diversity but noisy."
+
+  l2_arctic:
+    url: "https://psi.engr.tamu.edu/l2-arctic-corpus/"
+    notes: "Non-native English speakers. Directly relevant for pronunciation error detection."
+
+preprocessing:
+  target_sample_rate: 16000
+  max_duration_sec: 30.0
+  min_duration_sec: 0.1
+  normalize_audio: true
+  output_dir: "data/processed"
