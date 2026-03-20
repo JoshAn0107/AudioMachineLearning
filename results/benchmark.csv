@@ -1,26 +1,26 @@
 text,type,speakright_pron,azure_pron,speakright_acc,azure_acc,speakright_fluency,azure_fluency,speakright_completeness,azure_completeness,speakright_recognised,azure_recognised
-hello,word,43.94,100.0,75.13,100.0,69.43,100.0,0.0,100.0,Hallo,Hello.
-world,word,91.17,98.8,95.1,98.0,65.66,100.0,100.0,100.0,World,World.
-beautiful,word,90.41,100.0,94.41,100.0,63.23,100.0,100.0,100.0,Beautiful,Beautiful.
-pronunciation,word,88.9,98.8,94.8,98.0,54.9,100.0,100.0,100.0,Pronunciation,Pronunciation.
-technology,word,89.32,100.0,94.04,100.0,58.53,100.0,100.0,100.0,Technology,Technology.
-comfortable,word,90.43,99.4,95.26,99.0,61.63,100.0,100.0,100.0,Comfortable,Comfortable.
-environment,word,89.76,98.8,95.26,98.0,58.27,100.0,100.0,100.0,Environment,Environment.
-vocabulary,word,89.18,100.0,94.29,100.0,57.33,100.0,100.0,100.0,Vocabulary,Vocabulary.
-communication,word,88.98,97.6,94.31,96.0,56.29,100.0,100.0,100.0,Communication,Communication.
-international,word,89.5,98.8,94.22,98.0,59.07,100.0,100.0,100.0,International,International.
-apple,word,91.34,98.8,95.25,98.0,66.21,100.0,100.0,100.0,Apple,Apple.
-banana,word,89.86,95.8,92.33,93.0,64.62,100.0,100.0,100.0,Banana,Banana.
-elephant,word,90.28,100.0,94.88,100.0,61.63,100.0,100.0,100.0,Elephant,Elephant.
-university,word,89.51,99.4,95.12,99.0,57.33,100.0,100.0,100.0,University,University.
-development,word,89.92,99.4,95.26,99.0,59.07,100.0,100.0,100.0,Development,Development.
-extraordinary,word,89.08,100.0,94.04,100.0,57.33,100.0,100.0,100.0,Extraordinary,Extraordinary.
-congratulations,word,89.01,100.0,95.24,100.0,54.6,100.0,100.0,100.0,Congratulations,Congratulations.
-sophisticated,word,89.32,98.8,94.76,98.0,57.11,100.0,100.0,100.0,Sophisticated,Sophisticated.
-determination,word,88.76,98.8,93.56,98.0,56.69,100.0,100.0,100.0,Determination,Determination.
-responsibility,word,89.01,98.8,95.07,98.0,54.9,100.0,100.0,100.0,Responsibility,Responsibility.
+hello,word,90.05,100.0,75.13,100.0,100.0,100.0,100.0,100.0,Hallo,Hello.
+world,word,98.04,98.8,95.1,98.0,100.0,100.0,100.0,100.0,World,World.
+beautiful,word,97.77,100.0,94.41,100.0,100.0,100.0,100.0,100.0,Beautiful,Beautiful.
+pronunciation,word,97.92,98.8,94.8,98.0,100.0,100.0,100.0,100.0,Pronunciation,Pronunciation.
+technology,word,97.62,100.0,94.04,100.0,100.0,100.0,100.0,100.0,Technology,Technology.
+comfortable,word,98.1,99.4,95.26,99.0,100.0,100.0,100.0,100.0,Comfortable,Comfortable.
+environment,word,98.1,98.8,95.26,98.0,100.0,100.0,100.0,100.0,Environment,Environment.
+vocabulary,word,97.71,100.0,94.29,100.0,100.0,100.0,100.0,100.0,Vocabulary,Vocabulary.
+communication,word,97.72,97.6,94.31,96.0,100.0,100.0,100.0,100.0,Communication,Communication.
+international,word,97.69,98.8,94.22,98.0,100.0,100.0,100.0,100.0,International,International.
+apple,word,98.1,98.8,95.25,98.0,100.0,100.0,100.0,100.0,Apple,Apple.
+banana,word,96.93,95.8,92.33,93.0,100.0,100.0,100.0,100.0,Banana,Banana.
+elephant,word,97.95,100.0,94.88,100.0,100.0,100.0,100.0,100.0,Elephant,Elephant.
+university,word,98.05,99.4,95.12,99.0,100.0,100.0,100.0,100.0,University,University.
+development,word,98.1,99.4,95.26,99.0,100.0,100.0,100.0,100.0,Development,Development.
+extraordinary,word,97.62,100.0,94.04,100.0,100.0,100.0,100.0,100.0,Extraordinary,Extraordinary.
+congratulations,word,98.1,100.0,95.24,100.0,100.0,100.0,100.0,100.0,Congratulations,Congratulations.
+sophisticated,word,97.9,98.8,94.76,98.0,100.0,100.0,100.0,100.0,Sophisticated,Sophisticated.
+determination,word,97.42,98.8,93.56,98.0,100.0,100.0,100.0,100.0,Determination,Determination.
+responsibility,word,98.03,98.8,95.07,98.0,100.0,100.0,100.0,100.0,Responsibility,Responsibility.
 The quick brown fox jumps over the lazy dog,sentence,97.19,97.0,94.79,95.0,96.38,100.0,100.0,100.0,The Quick Brown Fox Jumps Over The Lazy Dog,The quick brown fox jumps over the lazy dog.
 She sells seashells by the seashore,sentence,95.9,96.4,94.54,94.0,90.4,100.0,100.0,100.0,She Sells Seashells By The Seashore,She sells seashells by the seashore.
-How much wood would a woodchuck chuck,sentence,79.78,97.6,67.33,96.0,92.79,100.0,85.71,100.0,How Much Wood Would A Wood Chuck Chuck,How much wood would a woodchuck Chuck?
+How much wood would a woodchuck chuck,sentence,85.49,97.6,67.33,96.0,92.79,100.0,100.0,100.0,How Much Wood Would A Wood Chuck Chuck,How much wood would a woodchuck Chuck?
 Peter Piper picked a peck of pickled peppers,sentence,97.6,97.0,94.23,95.0,99.54,100.0,100.0,100.0,Peter Piper Picked A Peck Of Pickled Peppers,Peter Piper picked a Peck of pickled Peppers.
 I would like a cup of coffee please,sentence,94.01,97.6,95.05,96.0,79.93,100.0,100.0,100.0,I Would Like A Cup Of Coffee Please,I would like a cup of coffee please.

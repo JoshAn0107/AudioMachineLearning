@@ -1,0 +1,60 @@
+text,type,quality,speakright_pron,speakright_acc,speakright_flu,speakright_comp,speakright_rec,azure_pron,azure_acc,azure_flu,azure_comp,azure_rec
+hello,word,native,90.05,75.13,100.0,100.0,Hallo,100.0,100.0,100.0,100.0,Hello.
+hello,word,good,90.4,76.0,100.0,100.0,Hallo,100.0,100.0,100.0,100.0,Hello.
+hello,word,medium,35.11,37.78,100.0,0.0,Hala,100.0,100.0,100.0,100.0,Hello.
+hello,word,poor,20.0,0.0,100.0,0.0,An I,97.6,96.0,100.0,100.0,Hello.
+hello,word,wrong,20.0,0.0,100.0,0.0,A,0.0,0.0,0.0,0.0,.
+beautiful,word,native,97.77,94.41,100.0,100.0,Beautiful,100.0,100.0,100.0,100.0,Beautiful.
+beautiful,word,good,98.08,95.19,100.0,100.0,Beautiful,98.8,98.0,100.0,100.0,Beautiful.
+beautiful,word,medium,98.08,95.19,100.0,100.0,Beautiful,97.6,96.0,100.0,100.0,Beautiful.
+beautiful,word,poor,60.0,0.0,100.0,100.0,He Is A Cov,84.4,74.0,100.0,100.0,Beautiful.
+beautiful,word,wrong,66.77,16.92,100.0,100.0,Be,0.0,0.0,0.0,0.0,.
+technology,word,native,97.62,94.04,100.0,100.0,Technology,100.0,100.0,100.0,100.0,Technology.
+technology,word,good,97.11,92.77,100.0,100.0,Technology,99.4,99.0,100.0,100.0,Technology.
+technology,word,medium,94.25,85.62,100.0,100.0,Tachnology,98.8,98.0,100.0,100.0,Technology.
+technology,word,poor,41.34,53.35,100.0,0.0,Herignomogy,97.0,95.0,100.0,100.0,Technology.
+technology,word,wrong,23.48,8.69,100.0,0.0,Esenelonguest,0.0,0.0,0.0,0.0,.
+apple,word,native,98.1,95.25,100.0,100.0,Apple,98.8,98.0,100.0,100.0,Apple.
+apple,word,good,96.55,91.39,100.0,100.0,Apple,95.2,92.0,100.0,100.0,Apple.
+apple,word,medium,41.33,53.34,100.0,0.0,Appo,97.0,95.0,100.0,100.0,Apple.
+apple,word,poor,20.0,0.0,100.0,0.0,Offwen,85.0,75.0,100.0,100.0,Apple.
+apple,word,wrong,97.09,92.72,100.0,100.0,Apple,95.8,93.0,100.0,100.0,Apple.
+environment,word,native,98.1,95.26,100.0,100.0,Environment,98.8,98.0,100.0,100.0,Environment.
+environment,word,good,97.72,94.3,100.0,100.0,Environment,97.6,96.0,100.0,100.0,Environment.
+environment,word,medium,98.03,95.08,100.0,100.0,Environment,96.4,94.0,100.0,100.0,Environment.
+environment,word,poor,20.73,1.83,100.0,0.0,In Barmem,93.4,89.0,100.0,100.0,Environment.
+environment,word,wrong,26.66,16.66,100.0,0.0,Memner Avnic,0.0,0.0,0.0,0.0,.
+congratulations,word,native,98.1,95.24,100.0,100.0,Congratulations,100.0,100.0,100.0,100.0,Congratulations.
+congratulations,word,good,98.05,95.14,100.0,100.0,Congratulations,97.0,95.0,100.0,100.0,Congratulations.
+congratulations,word,medium,97.91,94.77,100.0,100.0,Congratulations,96.4,94.0,100.0,100.0,Congratulations.
+congratulations,word,poor,60.0,0.0,100.0,100.0,He Got I I Ing,95.8,93.0,100.0,100.0,Congratulations.
+congratulations,word,wrong,32.48,31.2,100.0,0.0,Kengrat,82.6,71.0,100.0,100.0,Congratulations.
+university,word,native,98.05,95.12,100.0,100.0,University,99.4,99.0,100.0,100.0,University.
+university,word,good,97.87,94.67,100.0,100.0,University,98.2,97.0,100.0,100.0,University.
+university,word,medium,97.74,94.35,100.0,100.0,University,98.2,97.0,100.0,100.0,University.
+university,word,poor,37.94,44.86,100.0,0.0,Eunoberfute,95.8,93.0,100.0,100.0,University.
+university,word,wrong,27.46,18.64,100.0,0.0,Yenevakite,96.4,94.0,100.0,100.0,University.
+responsibility,word,native,98.03,95.07,100.0,100.0,Responsibility,98.8,98.0,100.0,100.0,Responsibility.
+responsibility,word,good,98.1,95.25,100.0,100.0,Responsibility,98.8,98.0,100.0,100.0,Responsibility.
+responsibility,word,medium,97.51,93.78,100.0,100.0,Responsibility,97.6,96.0,100.0,100.0,Responsibility.
+responsibility,word,poor,24.45,11.13,100.0,0.0,Which Held Herdenify,83.8,73.0,100.0,100.0,Responsibility.
+responsibility,word,wrong,20.0,0.0,100.0,0.0,Yes They Live Miss Moxser,2.8,14.0,0.0,0.0,Responsibility.
+The quick brown fox jumps over the lazy dog,sentence,native,97.19,94.79,96.38,100.0,The Quick Brown Fox Jumps Over The Lazy Dog,97.0,95.0,100.0,100.0,The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog,sentence,good,96.51,94.63,93.31,100.0,The Quick Brown Fox Jumps Over The Lazy Dog,99.4,99.0,100.0,100.0,The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog,sentence,medium,96.82,95.09,93.89,100.0,The Quick Brown Fox Jumps Over The Lazy Dog,99.4,99.0,100.0,100.0,The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog,sentence,poor,52.78,53.97,67.09,44.44,A Quick Brown Fox Jun Siter Than Avy Dove,98.2,97.0,100.0,100.0,The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog,sentence,wrong,33.57,19.0,63.18,33.33,Gos Easy I Let The Rest Somuch D Scos Mi Kilk I,21.2,6.0,100.0,0.0,Lazy.
+She sells seashells by the seashore,sentence,native,95.9,94.54,90.4,100.0,She Sells Seashells By The Seashore,96.4,94.0,100.0,100.0,She sells seashells by the seashore.
+She sells seashells by the seashore,sentence,good,95.35,95.08,86.57,100.0,She Sells Seashells By The Seashore,98.8,98.0,100.0,100.0,She sells seashells by the seashore.
+She sells seashells by the seashore,sentence,medium,90.38,76.19,99.5,100.0,She Sells Sea Shells By The Seashore,99.4,99.0,100.0,100.0,She sells seashells by the seashore.
+She sells seashells by the seashore,sentence,poor,90.1,87.25,76.01,100.0,She Sell Seashell By The Seashore,96.4,94.0,100.0,100.0,She sells seashells by the seashore.
+She sells seashells by the seashore,sentence,wrong,29.0,22.62,66.4,16.67,Moshe Sait Alt Plashi Slassish,29.0,43.0,23.0,33.0,Seashore She sells by She sells seashore.
+I would like a cup of coffee please,sentence,native,94.01,95.05,79.93,100.0,I Would Like A Cup Of Coffee Please,97.6,96.0,100.0,100.0,I would like a cup of coffee please.
+I would like a cup of coffee please,sentence,good,93.17,94.91,76.04,100.0,I Would Like A Cup Of Coffee Please,99.4,99.0,100.0,100.0,I would like a cup of coffee please.
+I would like a cup of coffee please,sentence,medium,92.18,95.24,70.41,100.0,I Would Like A Cup Of Coffee Please,99.4,99.0,100.0,100.0,I would like a cup of coffee please.
+I would like a cup of coffee please,sentence,poor,76.32,67.41,96.78,75.0,I Would Like A Couple Of Colfee Lees,97.0,95.0,100.0,100.0,I would like a cup of coffee please.
+I would like a cup of coffee please,sentence,wrong,24.15,9.22,52.33,25.0,Se And B Focer Bac Tec Galdeal,0.8,4.0,0.0,0.0,Please.
+hello,word,misread,50.1,75.26,100.0,0.0,Yellow,83.2,72.0,100.0,100.0,Hello.
+apple,word,misread,35.24,38.1,100.0,0.0,Maple,82.0,70.0,100.0,100.0,Apple.
+university,word,misread,46.28,65.7,100.0,0.0,Anniversary,10.6,53.0,0.0,0.0,University.
+beautiful,word,misread,24.23,10.58,100.0,0.0,Dutiful,95.2,92.0,100.0,100.0,Beautiful.

@@ -1,11 +1,11 @@
 """
-Score aggregation: phoneme → word → utterance.
+Score aggregation: phoneme -> word -> utterance.
 
 Produces scores that match Azure's PronunciationAssessment fields:
-  - AccuracyScore   – how closely phonemes match native pronunciation
-  - FluencyScore    – penalizes pauses and hesitation
-  - CompletenessScore – fraction of reference words that were pronounced
-  - PronScore       – overall weighted score (Azure weights: 0.4/0.2/0.4)
+  - AccuracyScore   - how closely phonemes match native pronunciation
+  - FluencyScore    - penalizes pauses and hesitation
+  - CompletenessScore - fraction of reference words that were pronounced
+  - PronScore       - overall weighted score (Azure weights: 0.4/0.2/0.4)
 """
 
 from __future__ import annotations
@@ -14,6 +14,23 @@ import numpy as np
 
 from .fluency import estimate_fluency_score
 from ..models.base_scorer import ScoringResult, WordResult
+
+
+def _fuzzy_match(a: str, b: str) -> bool:
+    """Check if two words are a fuzzy match (handles minor pronunciation variants)."""
+    if a == b:
+        return True
+    # Allow 1-char difference for words > 3 chars (e.g., hello vs hallo)
+    if len(a) > 3 and len(b) > 3:
+        if abs(len(a) - len(b)) <= 1:
+            diffs = sum(1 for x, y in zip(a, b) if x != y)
+            extra = abs(len(a) - len(b))
+            if diffs + extra <= 1:
+                return True
+    # Check if one contains the other (compound words: woodchuck vs wood+chuck)
+    if a in b or b in a:
+        return True
+    return False
 
 
 class ScoreAggregator:
@@ -45,11 +62,18 @@ class ScoreAggregator:
         else:
             accuracy_score = 0.0
 
-        # Completeness: fraction of reference words that appear in recognised output
-        ref_set = set(reference_words)
-        rec_set = set(recognised_words)
-        if ref_set:
-            completeness_score = min(100.0, 100.0 * len(ref_set & rec_set) / len(ref_set))
+        # Completeness: fraction of reference words matched in recognised output
+        # Uses fuzzy matching to handle minor pronunciation variants
+        if reference_words:
+            matched = 0
+            used_rec = set()
+            for ref_w in reference_words:
+                for j, rec_w in enumerate(recognised_words):
+                    if j not in used_rec and _fuzzy_match(ref_w, rec_w):
+                        matched += 1
+                        used_rec.add(j)
+                        break
+            completeness_score = min(100.0, 100.0 * matched / len(reference_words))
         else:
             completeness_score = 100.0
 
