@@ -35,10 +35,11 @@ checkpoints/
 data/raw/
 data/processed/
 
-# Results
-results/*.csv
-results/*.png
-results/*.json
+# Allow benchmark audio
+!data/benchmark_audio/
+
+# Results (allow benchmark outputs)
+# results/*.json
 
 # Jupyter
 .ipynb_checkpoints/

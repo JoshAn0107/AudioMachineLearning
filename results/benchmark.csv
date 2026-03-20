@@ -1,0 +1,26 @@
+text,type,speakright_pron,azure_pron,speakright_acc,azure_acc,speakright_fluency,azure_fluency,speakright_completeness,azure_completeness,speakright_recognised,azure_recognised
+hello,word,13.89,100.0,0.0,100.0,69.43,100.0,0.0,100.0,Rkdkddfdfrfupdvgrdkdf,Hello.
+world,word,13.13,98.8,0.0,98.0,65.66,100.0,0.0,100.0,Rkrdrdrdkdgdkdkd,World.
+beautiful,word,12.65,100.0,0.0,100.0,63.23,100.0,0.0,100.0,Rdrdrdrdrdrsrgdrd,Beautiful.
+pronunciation,word,10.98,98.8,0.0,98.0,54.9,100.0,0.0,100.0,'R'R'Wwdvdrdrdrgrgvdrwdrd,Pronunciation.
+technology,word,11.71,100.0,0.0,100.0,58.53,100.0,0.0,100.0,Rdrdrdrdndrdrdrdrdrdrgdrdr,Technology.
+comfortable,word,12.33,99.4,0.0,99.0,61.63,100.0,0.0,100.0,Rdrdrdrdrd<S>Rdrgdrdrd,Comfortable.
+environment,word,11.65,98.8,0.0,98.0,58.27,100.0,0.0,100.0,Krdrdrdgrdkdkrkdgdgkgdkrdrd,Environment.
+vocabulary,word,11.47,100.0,0.0,100.0,57.33,100.0,0.0,100.0,Rkdrdrdfqudrndfdfrdrbmbrsrdrgdrdr,Vocabulary.
+communication,word,11.26,97.6,0.0,96.0,56.29,100.0,0.0,100.0,Rkdkdkdndkdkjdkdkdkdkdrdkgkdekdkdkdk,Communication.
+international,word,11.81,98.8,0.0,98.0,59.07,100.0,0.0,100.0,Rdrdrdrdvdrdrdrgdrgndrdrd,International.
+apple,word,13.24,98.8,0.0,98.0,66.21,100.0,0.0,100.0,Rdgdgdedfrdfgdgdgdr,Apple.
+banana,word,12.92,95.8,0.0,93.0,64.62,100.0,0.0,100.0,Rdrdkdedrfddfrfbgfgedrd,Banana.
+elephant,word,12.33,100.0,0.0,100.0,61.63,100.0,0.0,100.0,Rdrdrdrdrdrdrdfdfdgdgdrd,Elephant.
+university,word,11.47,99.4,0.0,99.0,57.33,100.0,0.0,100.0,Rdrgrdrdgndrgndrdrdr,University.
+development,word,11.81,99.4,0.0,99.0,59.07,100.0,0.0,100.0,Rdrdrdrdrdndgddgdgdrdrdrdrdrd,Development.
+extraordinary,word,11.47,100.0,0.0,100.0,57.33,100.0,0.0,100.0,Vrwrwrwrdndrdrdrndrdrdrwbrvrvr,Extraordinary.
+congratulations,word,10.92,100.0,0.0,100.0,54.6,100.0,0.0,100.0,Rdrdrdrdndkdrdrnrdkrdkrdrdkrdkdkdgrdrdkdkedrdr,Congratulations.
+sophisticated,word,11.42,98.8,0.0,98.0,57.11,100.0,0.0,100.0,Wrdrfdvdwwgdrdrdkdrdndrdrdrqdgdrkdrbndrdrd,Sophisticated.
+determination,word,11.34,98.8,0.0,98.0,56.69,100.0,0.0,100.0,Rdrdrdndkrdrgdkrndrdkrdrdkrkrkgerdrd,Determination.
+responsibility,word,10.98,98.8,0.0,98.0,54.9,100.0,0.0,100.0,Vrvwrvwvdrdrdrdrdrdjdrdrgdv<S>R<S>Rvd,Responsibility.
+The quick brown fox jumps over the lazy dog,sentence,19.28,97.0,0.0,95.0,96.38,100.0,0.0,100.0,Rdrdrdrdrdrdrdrdrgdrdrgndrdrdfgdrdrdrdrdrgrdrgdrdrdrd,The quick brown fox jumps over the lazy dog.
+She sells seashells by the seashore,sentence,18.08,96.4,0.0,94.0,90.4,100.0,0.0,100.0,Rsdsdvgdrdsdqdsdsqdsdydqrndsdtdrdrgedsd,She sells seashells by the seashore.
+How much wood would a woodchuck chuck,sentence,18.56,97.6,0.0,96.0,92.79,100.0,0.0,100.0,Rdrdrdrndnrdrgdrdjdrdgdgndrgndrd,How much wood would a woodchuck Chuck?
+Peter Piper picked a peck of pickled peppers,sentence,19.91,97.0,0.0,95.0,99.54,100.0,0.0,100.0,Rsdsdsdsdsdrdrdrdrdrgdrsdgdrdgdndrgrdrdrdrgdrdrdrdrdrdrsdsdrdsdsd,Peter Piper picked a Peck of pickled Peppers.
+I would like a cup of coffee please,sentence,15.99,97.6,0.0,96.0,79.93,100.0,0.0,100.0,Rsrdsdrfrdrdrdrdrkdrdrdrndrdsdndrdrskdkdrdgdrkdrdrdskrsd,I would like a cup of coffee please.
