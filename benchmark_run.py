@@ -26,6 +26,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import soundfile as sf
 from pydub import AudioSegment
+from dotenv import load_dotenv
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -296,7 +298,7 @@ def main():
     logger.info("\n=== Step 2: Loading SpeakRight model ===")
     sys.path.insert(0, ".")
     from src.models.wav2vec2_scorer import Wav2Vec2PronunciationScorer
-    scorer = Wav2Vec2PronunciationScorer(model_name="facebook/wav2vec2-base")
+    scorer = Wav2Vec2PronunciationScorer(model_name=os.getenv("SPEAKRIGHT_MODEL", "facebook/wav2vec2-large-960h"))
     logger.info("SpeakRight model loaded on %s", scorer.device)
 
     # Step 3: Score each audio with both systems
