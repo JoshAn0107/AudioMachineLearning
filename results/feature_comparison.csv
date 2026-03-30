@@ -1,0 +1,7 @@
+features,classifier,accuracy_mean,accuracy_std,cv_scores
+MFCC (78-dim),SVM (RBF),76.4,4.5,"[np.float64(72.7), np.float64(72.7), np.float64(81.8), np.float64(81.8), np.float64(72.7)]"
+MFCC (78-dim),Random Forest,81.8,5.7,"[np.float64(81.8), np.float64(90.9), np.float64(81.8), np.float64(72.7), np.float64(81.8)]"
+Mel-Spec (256-dim),SVM (RBF),92.7,3.6,"[np.float64(90.9), np.float64(90.9), np.float64(90.9), np.float64(100.0), np.float64(90.9)]"
+Mel-Spec (256-dim),Random Forest,92.7,6.8,"[np.float64(90.9), np.float64(100.0), np.float64(90.9), np.float64(100.0), np.float64(81.8)]"
+Wav2Vec2 (2048-dim),SVM (RBF),38.2,8.9,"[np.float64(27.3), np.float64(45.5), np.float64(45.5), np.float64(45.5), np.float64(27.3)]"
+Wav2Vec2 (2048-dim),Random Forest,29.1,15.6,"[np.float64(0.0), np.float64(45.5), np.float64(36.4), np.float64(36.4), np.float64(27.3)]"
