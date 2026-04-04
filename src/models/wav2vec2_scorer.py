@@ -9,10 +9,13 @@ Architecture:
   5. Scores are aggregated to word and utterance level.
 """
 
+# pyright: reportMissingImports=false
+
 import re
 import time
 import logging
 from pathlib import Path
+from typing import TypedDict
 
 import numpy as np
 import torch
@@ -30,6 +33,20 @@ from ..scoring.aggregator import ScoreAggregator
 logger = logging.getLogger(__name__)
 
 
+class AlignmentEntry(TypedDict):
+    token_id: int
+    char: str
+    start_frame: int
+    end_frame: int
+
+
+class RecognizedWord(TypedDict):
+    text: str
+    chars: list[AlignmentEntry]
+    start_frame: int
+    end_frame: int
+
+
 class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
     """
     Offline pronunciation scorer using wav2vec2 + CTC-aligned GOP scoring.
@@ -42,8 +59,8 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
         self,
         model_name: str = "facebook/wav2vec2-base",
         device: str | None = None,
-        calibration_alpha: float = 4.0,
-        calibration_beta: float = 3.0,
+        calibration_alpha: float = 3.0,
+        calibration_beta: float = 3.5,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         logger.info("Loading %s on %s …", model_name, self.device)
@@ -110,7 +127,7 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
 
     def _decode_ctc_with_alignment(
         self, predicted_ids: list[int]
-    ) -> tuple[str, list[dict]]:
+    ) -> tuple[str, list[AlignmentEntry]]:
         """
         CTC greedy decode that tracks which frames correspond to each token.
 
@@ -180,7 +197,7 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
         log_probs: np.ndarray,
         reference_text: str,
         recognised_text: str,
-        frame_alignment: list[dict],
+        frame_alignment: list[AlignmentEntry],
         audio: np.ndarray,
         sample_rate: int,
     ) -> list[WordResult]:
@@ -260,11 +277,13 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
 
         return word_results
 
-    def _split_alignment_by_words(self, frame_alignment: list[dict]) -> list[dict]:
+    def _split_alignment_by_words(
+        self, frame_alignment: list[AlignmentEntry]
+    ) -> list[RecognizedWord]:
         """Split CTC alignment into word groups (separated by | tokens)."""
-        words = []
-        current_chars = []
-        current_start = None
+        words: list[RecognizedWord] = []
+        current_chars: list[AlignmentEntry] = []
+        current_start: int | None = None
 
         for entry in frame_alignment:
             if entry["char"] == "|":
@@ -273,7 +292,7 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
                     words.append({
                         "text": "".join(c["char"] for c in current_chars).lower(),
                         "chars": current_chars,
-                        "start_frame": current_start,
+                        "start_frame": current_start if current_start is not None else 0,
                         "end_frame": current_chars[-1]["end_frame"],
                     })
                     current_chars = []
@@ -288,7 +307,7 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
             words.append({
                 "text": "".join(c["char"] for c in current_chars).lower(),
                 "chars": current_chars,
-                "start_frame": current_start,
+                "start_frame": current_start if current_start is not None else 0,
                 "end_frame": current_chars[-1]["end_frame"],
             })
 
@@ -298,7 +317,7 @@ class Wav2Vec2PronunciationScorer(BasePronunciationScorer):
         self,
         log_probs: np.ndarray,
         ref_word: str,
-        rec_word: dict,
+        rec_word: RecognizedWord,
         ms_per_frame: float,
     ) -> list[PhonemeResult]:
         """

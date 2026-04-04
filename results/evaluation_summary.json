@@ -1,0 +1,131 @@
+{
+  "generated_at_utc": "2026-04-04T10:18:45.211685+00:00",
+  "inputs": {
+    "benchmark": "results/benchmark.csv",
+    "benchmark_diverse": "results/benchmark_diverse.csv"
+  },
+  "thresholds": {
+    "tier_mapping": {
+      "native": ">=90",
+      "good": "80-89.99",
+      "medium": "60-79.99",
+      "poor": "40-59.99",
+      "wrong": "<40"
+    },
+    "mispronunciation_threshold": "speakright_pron < 60",
+    "mispronunciation_positive_labels": [
+      "misread",
+      "poor",
+      "wrong"
+    ]
+  },
+  "regression": {
+    "benchmark": {
+      "n": 25,
+      "pearson_r": 0.19354147361676494,
+      "mae": 2.1028000000000002,
+      "rmse": 3.4751247459623658
+    },
+    "diverse": {
+      "n": 59,
+      "pearson_r": 0.5699443847133022,
+      "mae": 20.652881355932205,
+      "rmse": 32.32315384637259
+    },
+    "overall": {
+      "n": 84,
+      "pearson_r": 0.6079547342836027,
+      "mae": 15.132023809523808,
+      "rmse": 27.155702395980253
+    }
+  },
+  "tier_accuracy": {
+    "overall": 0.4067796610169492,
+    "per_quality": {
+      "native": 1.0,
+      "good": 0.0,
+      "medium": 0.0,
+      "poor": 0.18181818181818182,
+      "wrong": 0.8181818181818182,
+      "misread": 0.5
+    }
+  },
+  "mispronunciation_detection": {
+    "tp": 20,
+    "fp": 2,
+    "fn": 6,
+    "precision": 0.9090909090909091,
+    "recall": 0.7692307692307693,
+    "f1": 0.8333333333333333
+  },
+  "summary_table": [
+    {
+      "metric": "Pearson r (benchmark)",
+      "value": 0.1935
+    },
+    {
+      "metric": "MAE (benchmark)",
+      "value": 2.1028
+    },
+    {
+      "metric": "RMSE (benchmark)",
+      "value": 3.4751
+    },
+    {
+      "metric": "Pearson r (diverse)",
+      "value": 0.5699
+    },
+    {
+      "metric": "MAE (diverse)",
+      "value": 20.6529
+    },
+    {
+      "metric": "RMSE (diverse)",
+      "value": 32.3232
+    },
+    {
+      "metric": "Pearson r (overall)",
+      "value": 0.608
+    },
+    {
+      "metric": "MAE (overall)",
+      "value": 15.132
+    },
+    {
+      "metric": "RMSE (overall)",
+      "value": 27.1557
+    },
+    {
+      "metric": "Tier accuracy (overall)",
+      "value": 0.4068
+    },
+    {
+      "metric": "Mispronunciation F1",
+      "value": 0.8333
+    },
+    {
+      "metric": "Tier accuracy (native)",
+      "value": 1.0
+    },
+    {
+      "metric": "Tier accuracy (good)",
+      "value": 0.0
+    },
+    {
+      "metric": "Tier accuracy (medium)",
+      "value": 0.0
+    },
+    {
+      "metric": "Tier accuracy (poor)",
+      "value": 0.1818
+    },
+    {
+      "metric": "Tier accuracy (wrong)",
+      "value": 0.8182
+    },
+    {
+      "metric": "Tier accuracy (misread)",
+      "value": 0.5
+    }
+  ]
+}
