@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# pyright: reportMissingTypeStubs=false, reportAttributeAccessIssue=false, reportUnknownVariableType=false, reportUnknownMemberType=false, reportArgumentType=false, reportUnknownArgumentType=false, reportAny=false, reportUnusedCallResult=false
 """Generate consolidated benchmark metrics and plots.
 
 Reads:
@@ -20,6 +21,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.patches import Rectangle
+from scipy.stats import kendalltau, spearmanr
 
 matplotlib.use("Agg")
 
@@ -27,6 +30,9 @@ matplotlib.use("Agg")
 QUALITY_ORDER = ["native", "good", "medium", "poor", "wrong", "misread"]
 TIER_ORDER = ["native", "good", "medium", "poor", "wrong"]
 MISPRON_QUALITY = {"poor", "wrong", "misread"}
+ACCEPTABLE_QUALITY = {"native", "good", "medium"}
+PROBLEMATIC_QUALITY = {"poor", "wrong", "misread"}
+RANK = {"native": 0, "good": 1, "medium": 2, "poor": 3, "wrong": 4, "misread": 4}
 
 
 def score_to_tier(score: float) -> str:
@@ -112,7 +118,13 @@ def main() -> None:
     diverse_eval["quality"] = diverse_eval["quality"].str.lower()
     diverse_eval["expected_tier"] = diverse_eval["quality"].map(expected_tier_from_quality)
     diverse_eval["pred_tier"] = diverse_eval["speakright_pron"].map(score_to_tier)
+    diverse_eval["expected_rank"] = diverse_eval["quality"].map(RANK)
+    diverse_eval["pred_rank"] = diverse_eval["pred_tier"].map(RANK)
     diverse_eval["tier_match"] = diverse_eval["expected_tier"] == diverse_eval["pred_tier"]
+    diverse_eval["tier_within_one"] = (diverse_eval["expected_rank"] - diverse_eval["pred_rank"]).abs() <= 1
+
+    diverse_eval["expected_binary_problematic"] = diverse_eval["quality"].isin(PROBLEMATIC_QUALITY)
+    diverse_eval["pred_binary_problematic"] = diverse_eval["speakright_pron"] < 60.0
 
     per_tier_accuracy = (
         diverse_eval.groupby("quality")["tier_match"]
@@ -121,7 +133,21 @@ def main() -> None:
         .dropna()
         .to_dict()
     )
-    overall_tier_accuracy = float(diverse_eval["tier_match"].mean())
+    tier_accuracy_strict = float(diverse_eval["tier_match"].mean())
+    tier_accuracy_within_one = float(diverse_eval["tier_within_one"].mean())
+    binary_acceptable_accuracy = float(
+        (diverse_eval["expected_binary_problematic"] == diverse_eval["pred_binary_problematic"]).mean()
+    )
+
+    corr_df = diverse_eval[["expected_rank", "speakright_pron"]].dropna()
+    spearman_r, spearman_p = spearmanr(corr_df["expected_rank"], -corr_df["speakright_pron"])
+    kendall_tau, kendall_p = kendalltau(corr_df["expected_rank"], -corr_df["speakright_pron"])
+    ordinal_correlation = {
+        "spearman_r": float(spearman_r),
+        "spearman_p": float(spearman_p),
+        "kendall_tau": float(kendall_tau),
+        "kendall_p": float(kendall_p),
+    }
 
     y_true = diverse_eval["quality"].isin(MISPRON_QUALITY).astype(int).to_numpy()
     y_pred = (diverse_eval["speakright_pron"] < 60.0).astype(int).to_numpy()
@@ -137,7 +163,11 @@ def main() -> None:
         {"metric": "Pearson r (overall)", "value": round(overall_metrics["pearson_r"], 4)},
         {"metric": "MAE (overall)", "value": round(overall_metrics["mae"], 4)},
         {"metric": "RMSE (overall)", "value": round(overall_metrics["rmse"], 4)},
-        {"metric": "Tier accuracy (overall)", "value": round(overall_tier_accuracy, 4)},
+        {"metric": "Tier accuracy strict (diverse)", "value": round(tier_accuracy_strict, 4)},
+        {"metric": "Tier accuracy within one (diverse)", "value": round(tier_accuracy_within_one, 4)},
+        {"metric": "Binary acceptable accuracy (diverse)", "value": round(binary_acceptable_accuracy, 4)},
+        {"metric": "Spearman rho (diverse tiers)", "value": round(ordinal_correlation["spearman_r"], 4)},
+        {"metric": "Kendall tau (diverse tiers)", "value": round(ordinal_correlation["kendall_tau"], 4)},
         {"metric": "Mispronunciation F1", "value": round(mispron_f1["f1"], 4)},
     ]
 
@@ -145,7 +175,7 @@ def main() -> None:
         if quality in per_tier_accuracy:
             summary_table.append(
                 {
-                    "metric": f"Tier accuracy ({quality})",
+                    "metric": f"Tier accuracy strict ({quality})",
                     "value": round(float(per_tier_accuracy[quality]), 4),
                 }
             )
@@ -164,6 +194,10 @@ def main() -> None:
                 "poor": "40-59.99",
                 "wrong": "<40",
             },
+            "tier_rank_mapping": RANK,
+            "binary_acceptable_labels": sorted(ACCEPTABLE_QUALITY),
+            "binary_problematic_labels": sorted(PROBLEMATIC_QUALITY),
+            "binary_problematic_threshold": "speakright_pron < 60",
             "mispronunciation_threshold": "speakright_pron < 60",
             "mispronunciation_positive_labels": sorted(MISPRON_QUALITY),
         },
@@ -172,8 +206,15 @@ def main() -> None:
             "diverse": diverse_metrics,
             "overall": overall_metrics,
         },
+        "tier_metrics": {
+            "tier_accuracy_strict": tier_accuracy_strict,
+            "tier_accuracy_within_one": tier_accuracy_within_one,
+            "binary_acceptable_accuracy": binary_acceptable_accuracy,
+            "ordinal_correlation": ordinal_correlation,
+        },
         "tier_accuracy": {
-            "overall": overall_tier_accuracy,
+            "overall": tier_accuracy_strict,
+            "strict": tier_accuracy_strict,
             "per_quality": per_tier_accuracy,
         },
         "mispronunciation_detection": mispron_f1,
@@ -212,9 +253,9 @@ def main() -> None:
 
     ax = axes[0, 1]
     grouped = (
-        diverse.groupby("quality")[["speakright_pron", "azure_pron"]]
+        diverse_eval.groupby("quality")[["speakright_pron", "azure_pron"]]
         .mean()
-        .reindex([q for q in QUALITY_ORDER if q in set(diverse["quality"].str.lower())])
+        .reindex([q for q in QUALITY_ORDER if q in set(diverse_eval["quality"])])
     )
     x = np.arange(len(grouped.index))
     width = 0.36
@@ -228,16 +269,42 @@ def main() -> None:
     ax.legend()
 
     ax = axes[1, 0]
-    per_tier_items = [(k, per_tier_accuracy[k]) for k in QUALITY_ORDER if k in per_tier_accuracy]
-    labels = [k for k, _ in per_tier_items]
-    values = [v for _, v in per_tier_items]
-    ax.bar(labels, values, color="#9467bd")
-    ax.set_ylim(0, 1.05)
-    ax.set_title("Per-tier Accuracy (SpeakRight)")
-    ax.set_ylabel("Accuracy")
-    ax.tick_params(axis="x", rotation=25)
-    for i, value in enumerate(values):
-        ax.text(i, value + 0.02, f"{value:.2f}", ha="center", va="bottom", fontsize=9)
+    metric_labels = [
+        "Strict accuracy",
+        "Within-one accuracy",
+        "Binary acceptable",
+        "Spearman rho",
+        "Kendall tau",
+    ]
+    metric_values = [
+        tier_accuracy_strict,
+        tier_accuracy_within_one,
+        binary_acceptable_accuracy,
+        ordinal_correlation["spearman_r"],
+        ordinal_correlation["kendall_tau"],
+    ]
+    metric_colors = ["#9467bd", "#17becf", "#8c564b", "#2ca02c", "#bcbd22"]
+    ypos = np.arange(len(metric_labels))
+    ax.barh(ypos, metric_values, color=metric_colors)
+    ax.set_yticks(ypos)
+    ax.set_yticklabels(metric_labels)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 1.05)
+    ax.set_xlabel("Value")
+    ax.set_title("Tier-related Metrics (diverse set)")
+    ax.grid(axis="x", linestyle=":", alpha=0.35)
+    for i, value in enumerate(metric_values):
+        ax.text(min(value + 0.02, 1.01), i, f"{value:.3f}", va="center", ha="left", fontsize=9)
+    ax.text(
+        0.98,
+        0.02,
+        f"p(rho)={ordinal_correlation['spearman_p']:.2e}\np(tau)={ordinal_correlation['kendall_p']:.2e}",
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=8,
+        bbox={"facecolor": "white", "alpha": 0.85, "edgecolor": "none"},
+    )
 
     ax = axes[1, 1]
     cm = pd.crosstab(
@@ -245,6 +312,20 @@ def main() -> None:
         pd.Categorical(diverse_eval["pred_tier"], categories=TIER_ORDER),
     )
     im = ax.imshow(cm.values, cmap="Blues")
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            if abs(i - j) <= 1:
+                ax.add_patch(
+                    Rectangle(
+                        (j - 0.5, i - 0.5),
+                        1,
+                        1,
+                        facecolor="#f1c40f",
+                        edgecolor="#f39c12",
+                        linewidth=0.8,
+                        alpha=0.12,
+                    )
+                )
     ax.set_title("Tier Confusion Matrix")
     ax.set_xlabel("Predicted tier")
     ax.set_ylabel("Expected tier")
@@ -261,7 +342,7 @@ def main() -> None:
         f"Full Evaluation Summary | Mispronunciation F1={mispron_f1['f1']:.3f}",
         fontsize=14,
     )
-    fig.tight_layout(rect=[0, 0, 1, 0.97])
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
 
     summary_png_path = results_dir / "evaluation_summary.png"
     fig.savefig(summary_png_path, dpi=200)

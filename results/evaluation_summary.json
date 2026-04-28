@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-04-04T10:18:45.211685+00:00",
+  "generated_at_utc": "2026-04-28T19:39:11.099516+00:00",
   "inputs": {
     "benchmark": "results/benchmark.csv",
     "benchmark_diverse": "results/benchmark_diverse.csv"
@@ -12,6 +12,25 @@
       "poor": "40-59.99",
       "wrong": "<40"
     },
+    "tier_rank_mapping": {
+      "native": 0,
+      "good": 1,
+      "medium": 2,
+      "poor": 3,
+      "wrong": 4,
+      "misread": 4
+    },
+    "binary_acceptable_labels": [
+      "good",
+      "medium",
+      "native"
+    ],
+    "binary_problematic_labels": [
+      "misread",
+      "poor",
+      "wrong"
+    ],
+    "binary_problematic_threshold": "speakright_pron < 60",
     "mispronunciation_threshold": "speakright_pron < 60",
     "mispronunciation_positive_labels": [
       "misread",
@@ -39,8 +58,20 @@
       "rmse": 27.155702395980253
     }
   },
+  "tier_metrics": {
+    "tier_accuracy_strict": 0.4067796610169492,
+    "tier_accuracy_within_one": 0.7796610169491526,
+    "binary_acceptable_accuracy": 0.864406779661017,
+    "ordinal_correlation": {
+      "spearman_r": 0.7684768305846057,
+      "spearman_p": 1.1995676629562583e-12,
+      "kendall_tau": 0.5989302036179879,
+      "kendall_p": 7.858203833636389e-10
+    }
+  },
   "tier_accuracy": {
     "overall": 0.4067796610169492,
+    "strict": 0.4067796610169492,
     "per_quality": {
       "native": 1.0,
       "good": 0.0,
@@ -96,35 +127,51 @@
       "value": 27.1557
     },
     {
-      "metric": "Tier accuracy (overall)",
+      "metric": "Tier accuracy strict (diverse)",
       "value": 0.4068
+    },
+    {
+      "metric": "Tier accuracy within one (diverse)",
+      "value": 0.7797
+    },
+    {
+      "metric": "Binary acceptable accuracy (diverse)",
+      "value": 0.8644
+    },
+    {
+      "metric": "Spearman rho (diverse tiers)",
+      "value": 0.7685
+    },
+    {
+      "metric": "Kendall tau (diverse tiers)",
+      "value": 0.5989
     },
     {
       "metric": "Mispronunciation F1",
       "value": 0.8333
     },
     {
-      "metric": "Tier accuracy (native)",
+      "metric": "Tier accuracy strict (native)",
       "value": 1.0
     },
     {
-      "metric": "Tier accuracy (good)",
+      "metric": "Tier accuracy strict (good)",
       "value": 0.0
     },
     {
-      "metric": "Tier accuracy (medium)",
+      "metric": "Tier accuracy strict (medium)",
       "value": 0.0
     },
     {
-      "metric": "Tier accuracy (poor)",
+      "metric": "Tier accuracy strict (poor)",
       "value": 0.1818
     },
     {
-      "metric": "Tier accuracy (wrong)",
+      "metric": "Tier accuracy strict (wrong)",
       "value": 0.8182
     },
     {
-      "metric": "Tier accuracy (misread)",
+      "metric": "Tier accuracy strict (misread)",
       "value": 0.5
     }
   ]
